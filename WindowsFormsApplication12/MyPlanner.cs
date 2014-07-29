@@ -12,7 +12,7 @@ namespace MyPlanner
 {
     public partial class MyPlanner : Form
     {
-        int cur_method=0;
+        public int cur_method=0;
         SQLManager sqlM;
         public MyPlanner()
         {    
@@ -28,7 +28,7 @@ namespace MyPlanner
             UpdateDatagridView(cur_method);      
         }
 
-        private void UpdateDatagridView(int method)
+        public void UpdateDatagridView(int method)
         {
             DataSet ds = sqlM.SortResult(method);
             dataGridView1.DataSource = ds.Tables[0];
@@ -120,7 +120,29 @@ namespace MyPlanner
             important = dataGridView1.Rows[dataGridView1.CurrentCellAddress.Y].Cells[3].Value.ToString();
             plan = sqlM.getPlan(id);
 
-            new PlanView(id, subject, important, date, plan).Show();
+            new PlanView(id, subject, important, date, plan, this).Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string subject = dataGridView1.Rows[dataGridView1.CurrentCellAddress.Y].Cells[2].Value.ToString();
+            int id = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentCellAddress.Y].Cells[0].Value); 
+            DialogResult dr = MessageBox.Show("\'"+subject.Trim() +"\' 계획을 삭제합니까?",
+                      "경고", MessageBoxButtons.YesNo);
+            switch (dr)
+            {
+                case DialogResult.Yes:
+                    if (sqlM.deletePlan(id))
+                    {
+                        MessageBox.Show("정삭 삭제 되었습니다");
+                        UpdateDatagridView(cur_method);
+                    }
+                    break;
+                case DialogResult.No:
+                    break;
+            }
+            
+            
         }
     }
 }

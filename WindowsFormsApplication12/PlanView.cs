@@ -17,9 +17,12 @@ namespace MyPlanner
         private string subject;
         private string important;
         private string plan;
-
-        public PlanView(int id, string subject, string important, DateTime date, string plan)
+        private SQLManager sqlM;
+        private MyPlanner myPlanner;
+        public PlanView(int id, string subject, string important, DateTime date, string plan, MyPlanner myPlanner)
         {
+            sqlM = new SQLManager();
+            this.myPlanner = myPlanner;
             this.id = id;
             this.date = date;
             this.subject = subject;
@@ -45,6 +48,26 @@ namespace MyPlanner
         private void closeBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void delBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("\'" + subject.Trim() + "\' 계획을 삭제합니까?",
+                      "경고", MessageBoxButtons.YesNo);
+            switch (dr)
+            {
+                case DialogResult.Yes:
+                    if (sqlM.deletePlan(id))
+                    {
+                        MessageBox.Show("정삭 삭제 되었습니다");
+                        myPlanner.UpdateDatagridView(myPlanner.cur_method);
+                        myPlanner.Focus();
+                        this.Close();
+                    }
+                    break;
+                case DialogResult.No:
+                    break;
+            }
         }
     }
 }

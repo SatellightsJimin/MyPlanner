@@ -185,11 +185,12 @@
             this.button2.TabIndex = 0;
             this.button2.Text = "삭제";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
             this.button3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button3.Location = new System.Drawing.Point(42, 3);
+            this.button3.Location = new System.Drawing.Point(43, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(66, 19);
             this.button3.TabIndex = 1;
@@ -346,7 +347,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MyPlanner";
-            this.Text = "Form1";
+            this.Text = "MyPlanner";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);

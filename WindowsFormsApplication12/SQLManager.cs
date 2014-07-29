@@ -101,8 +101,31 @@ namespace MyPlanner
                     conn.Close();
                     return null;
                 }
-                
-                
+
+
+            }
+        }
+
+        public bool deletePlan(int id)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(strConn))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "DELETE FROM ToDoList WHERE Id=@id";
+                    SqlParameter paramId = new SqlParameter("@id", SqlDbType.Int);
+                    paramId.Value = id;
+                    cmd.Parameters.Add(paramId);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
     }

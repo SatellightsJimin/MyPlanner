@@ -101,9 +101,9 @@
             // subjectBox
             // 
             this.subjectBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.subjectBox.Location = new System.Drawing.Point(67, 3);
+            this.subjectBox.Location = new System.Drawing.Point(66, 3);
             this.subjectBox.Name = "subjectBox";
-            this.subjectBox.Size = new System.Drawing.Size(333, 21);
+            this.subjectBox.Size = new System.Drawing.Size(334, 21);
             this.subjectBox.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -226,6 +226,7 @@
             this.delBtn.TabIndex = 0;
             this.delBtn.Text = "삭제";
             this.delBtn.UseVisualStyleBackColor = true;
+            this.delBtn.Click += new System.EventHandler(this.delBtn_Click);
             // 
             // closeBtn
             // 
